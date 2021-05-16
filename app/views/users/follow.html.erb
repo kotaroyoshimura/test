@@ -1,0 +1,20 @@
+<h2>Follow Users</h2>
+ <table class="table">
+  <tbody>
+   <tr>
+    <th>image</th>
+    <th>name</th>
+    <th></th>
+    <th></th>
+   </tr>
+   <% @user.following_user.where.not(id: current_user.id).each do |user| %>
+   <tr>
+    <th><%= attachment_image_tag user,:profile_image,:fill,100,100,format:'ipeg',fallback:"no_image.jpeg",size:'30x30' %></th>
+    <th><%=user.name%></th>
+    <th><%= "フォロー数: #{user.follower.count}" %></th>
+    <th><%= "フォロワー数: #{user.followed.count}" %></th>
+    <th><%= link_to "show", user_path(user) %></th>
+   </tr>
+   <% end %>
+  </tbody>
+ </table>
